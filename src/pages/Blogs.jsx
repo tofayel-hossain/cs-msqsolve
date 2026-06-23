@@ -109,7 +109,7 @@ export default function Blogs() {
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <User size={12} />
-                  By Admin
+                  By {post.author || 'Admin'}
                 </span>
               </div>
 

@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS posts (
     explanations TEXT,               -- JSON structure: ["Explanation Q1", "Explanation Q2", ...]
     questions TEXT,                  -- JSON structure: [ { q: "Q text", a: "opt A", b: "opt B", c: "opt C", d: "opt D" }, ... ]
     status TEXT DEFAULT 'draft',     -- 'draft', 'published'
+    author TEXT DEFAULT 'Admin',     -- author name set by admin panel
     published_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -51,3 +52,19 @@ CREATE TABLE IF NOT EXISTS practice_sessions (
 );
 
 CREATE INDEX IF NOT EXISTS idx_practice_user ON practice_sessions(user_id, created_at DESC);
+
+-- 4. Site Visits Table (Traffic Tracking)
+CREATE TABLE IF NOT EXISTS site_visits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    path TEXT NOT NULL,
+    user_agent TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_visits_created ON site_visits(created_at);
+
+-- 5. Settings Table (SEO Metadata & Customisations)
+CREATE TABLE IF NOT EXISTS settings (
+    key TEXT PRIMARY KEY,
+    value TEXT
+);

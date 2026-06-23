@@ -733,8 +733,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.85rem;
 }
 
+.hamburger {
+  display: none;
+}
+
 /* ── Responsive Mobile ── */
 @media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
   .nav-links {
     display: none;
   }
@@ -748,4 +756,28 @@ h1, h2, h3, h4, h5, h6 {
     gap: 12px;
     text-align: center;
   }
+}
+
+/* ── Analytics Chart & Icons ── */
+.chart-bar {
+  transition: all 0.2s ease;
+}
+
+.chart-bar:hover {
+  background: linear-gradient(to top, var(--primary-light), #c084fc) !important;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+.chart-bar:hover .chart-tooltip {
+  opacity: 1 !important;
+  bottom: 115% !important;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
 }

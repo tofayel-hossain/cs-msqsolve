@@ -226,7 +226,7 @@ export default function ExamDetail() {
             </span>
             <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               <User size={12} />
-              By Admin
+              By {post.author || 'Admin'}
             </span>
             <span>•</span>
             <span>{post.questions.length} MCQ Questions</span>

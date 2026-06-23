@@ -70,7 +70,8 @@ export async function onRequestGet(context) {
         mcq_count: post.mcq_count,
         questions: parsedQuestions,
         mode: "practice",
-        isLoggedIn: true
+        isLoggedIn: true,
+        author: post.author || 'Admin'
       }, 200);
     }
 
@@ -88,7 +89,8 @@ export async function onRequestGet(context) {
       questions: parsedQuestions,
       answers: parsedAnswers,
       explanations: parsedExplanations,
-      mode: "guest"
+      mode: "guest",
+      author: post.author || 'Admin'
     }, 200);
   } catch (err) {
     return jsonResponse({ error: `Failed to fetch MCQ detail: ${err.message}` }, 500);

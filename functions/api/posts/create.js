@@ -31,7 +31,8 @@ export async function onRequestPost(context) {
       questions, // Object/Array JSON
       answers, // Object JSON (e.g. { ka: [...], kha: [...] })
       explanations = "[]", // Object/Array JSON
-      status = "published"
+      status = "published",
+      author = "Admin"
     } = body;
 
     if (!category || !year || !title || !slug || !questions || !answers) {
@@ -46,20 +47,20 @@ export async function onRequestPost(context) {
       // Update existing post
       await DB.prepare(`
         UPDATE posts 
-        SET category = ?, year = ?, title = ?, slug = ?, subject_code = ?, subject = ?, board = ?, mcq_count = ?, questions = ?, answers = ?, explanations = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+        SET category = ?, year = ?, title = ?, slug = ?, subject_code = ?, subject = ?, board = ?, mcq_count = ?, questions = ?, answers = ?, explanations = ?, status = ?, author = ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
       `)
-      .bind(category, year, title, slug, subject_code, subject, board, mcq_count, questionsStr, answersStr, explanationsStr, status, id)
+      .bind(category, year, title, slug, subject_code, subject, board, mcq_count, questionsStr, answersStr, explanationsStr, status, author, id)
       .run();
 
       return jsonResponse({ message: "MCQ set updated successfully!", id }, 200);
     } else {
       // Insert new post
       const info = await DB.prepare(`
-        INSERT INTO posts (category, year, title, slug, subject_code, subject, board, mcq_count, questions, answers, explanations, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO posts (category, year, title, slug, subject_code, subject, board, mcq_count, questions, answers, explanations, status, author)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `)
-      .bind(category, year, title, slug, subject_code, subject, board, mcq_count, questionsStr, answersStr, explanationsStr, status)
+      .bind(category, year, title, slug, subject_code, subject, board, mcq_count, questionsStr, answersStr, explanationsStr, status, author)
       .run();
 
       return jsonResponse({ message: "MCQ set created successfully!", id: info.meta.last_row_id }, 201);

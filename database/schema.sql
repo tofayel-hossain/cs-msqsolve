@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS posts (
     answers JSON NOT NULL, -- Array of 'a','b','c','d'
     notes TEXT,
     status ENUM('draft', 'published') DEFAULT 'draft',
+    author VARCHAR(100) DEFAULT 'Admin',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- Indexes for super-fast category lookups
