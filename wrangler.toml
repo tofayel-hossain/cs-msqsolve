@@ -1,0 +1,10 @@
+# Cloudflare Wrangler Configuration File
+# Used for local development and wrangler deployments
+
+name = "mcqsolve"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mcqsolve-db"
+database_id = "mcqsolve-db-local-id"
